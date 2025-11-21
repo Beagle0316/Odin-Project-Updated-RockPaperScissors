@@ -23,74 +23,86 @@ function getComputerChoice () {
 }
 
 // FUNCTION getHumanChoice
+/*
 function getHumanChoice(){
     // DECLARE variables
     let sChoice;
+    const button = document.querySelectorAll("button");
 
-    // SEQUENCE prompt the user for their choice
-    sChoice = prompt("Please write your choice (Rock, Paper, or Scissors)");
+    button.forEach((button) =>{
+        button.addEventListener('click', () =>{
+            alert("button clicked");
+            sChoice = button.className;
+        })
+    });
 
     // RETURN
-    return sChoice.toUpperCase();
+    return sChoice;
 }
+*/
 
 // FUNCTION playRound
 function playRound(humanChoice, computerChoice){
     switch (humanChoice){
         case "ROCK":
             if (computerChoice === "ROCK"){
-                console.log("Tie! Rock equals Rock");
+                alert("Tie! Rock equals Rock");
             }
             else if (computerChoice === "PAPER"){
-                console.log("You lose! Paper beats Rock");
+                alert("You lose! Paper beats Rock");
                 ncomputerScore++;
             }
             else{
-                console.log("You win! Rock beats Scissors");
+                alert("You win! Rock beats Scissors");
                 nhumanScore++;
             }
             break;
         case "PAPER":
             if (computerChoice === "ROCK"){
-                console.log("You win! Paper beats Rock");
+                alert("You win! Paper beats Rock");
                 nhumanScore++;
             }
             else if (computerChoice === "PAPER"){
-                console.log("Tie! Paper equals Paper");
+                alert("Tie! Paper equals Paper");
 
             }
             else{
-                console.log("You Lose! Scissors beats Paper");
+                alert("You Lose! Scissors beats Paper");
                 ncomputerScore++;
             }
             break;
         case "SCISSORS":
             if (computerChoice === "ROCK"){
-                console.log("You lose! Rock beats Scissors");
+                alert("You lose! Rock beats Scissors");
                 ncomputerScore++;
             }
             else if(computerChoice === "PAPER"){
-                console.log("You win! Scissors beats Paper");
+                alert("You win! Scissors beats Paper");
                 nhumanScore++;
             }
             else{
-                console.log("Tie! Scissors equals Scissors");
+                alert("Tie! Scissors equals Scissors");
             }
             break;
         default:
-            console.log("Invalid input! Point goes to computer!");
+            alert("Invalid input! Point goes to computer!");
             ncomputerScore++;
     }
 }
 
 // FUNCTION playGame
 function playGame(){
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
+    const buttons = document.querySelectorAll("button");
+    
+    buttons.forEach((button) => {
+        button.addEventListener("click", () =>{
+            playRound(button.className, getComputerChoice());
+        });
+    });
+    
 
+
+    /*
     // SEQUENCE declare the winner of the game
     if (nhumanScore > ncomputerScore){
         console.log("Human Player Wins!");
@@ -101,10 +113,12 @@ function playGame(){
     else{
         console.log("It is a tie! Refresh and play again!");
     }
+    */
 }
 // DECLARE global variables
 let nhumanScore = 0;
 let ncomputerScore = 0;
 
 // SEQUENCE play the game!
-console.log(playGame());
+playGame();
+
