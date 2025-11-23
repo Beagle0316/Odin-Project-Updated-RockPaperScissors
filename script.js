@@ -22,25 +22,6 @@ function getComputerChoice () {
     return sComputerChoice.toUpperCase();
 }
 
-// FUNCTION getHumanChoice
-/*
-function getHumanChoice(){
-    // DECLARE variables
-    let sChoice;
-    const button = document.querySelectorAll("button");
-
-    button.forEach((button) =>{
-        button.addEventListener('click', () =>{
-            alert("button clicked");
-            sChoice = button.className;
-        })
-    });
-
-    // RETURN
-    return sChoice;
-}
-*/
-
 // FUNCTION playRound
 function playRound(humanChoice, computerChoice){
     const container = document.querySelector(".textContainer");
@@ -103,26 +84,48 @@ function playGame(){
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
         button.addEventListener("click", () =>{
-            playRound(button.className, getComputerChoice());
+            if (round <= 5){
+                playRound(button.className, getComputerChoice());
+                ++round;
+                dispatchFinish(round);
+            }
         });
     });
 }
+
+// FUNCTION dispatchFinish
+function dispatchFinish(round){
+    if (round > 5){
+        document.dispatchEvent(display);
+    }
+}
+
 // DECLARE global variables
 let nhumanScore = 0;
 let ncomputerScore = 0;
+let round = 1;
 
 // SEQUENCE play the game!
 playGame();
 
+//SEQUENCE create custom event
+let display = new CustomEvent("display");
+
 
 // SEQUENCE declare the winner of the game
-if (nhumanScore > ncomputerScore){
-    console.log("Human Player Wins!");
-}
-else if(ncomputerScore > nhumanScore){
-    console.log("Computer Player Wins!");
-}
-else{
-    console.log("It is a tie! Refresh and play again!");
-}
+document.addEventListener("display", () =>{
+    const container = document.querySelector(".textContainer");
+    let finalText = document.createElement("p");
+    if (nhumanScore > ncomputerScore){
+        finalText.innerHTML = "Human Player Wins!";
+    }
+    else if(ncomputerScore > nhumanScore){
+        finalText.innerHTML = "Computer Player Wins!";
+    }
+    else{
+        finalText.innerHTML = "It is a tie! Refresh and play again!";
+    }
+    container.appendChild(finalText);
+});
+
 
