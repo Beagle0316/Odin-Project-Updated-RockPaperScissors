@@ -43,51 +43,54 @@ function getHumanChoice(){
 
 // FUNCTION playRound
 function playRound(humanChoice, computerChoice){
+    const container = document.querySelector(".textContainer");
+    const text = document.createElement("p");
     switch (humanChoice){
         case "ROCK":
             if (computerChoice === "ROCK"){
-                alert("Tie! Rock equals Rock");
+                text.textContent = "Tie! Rock equals Rock";
             }
             else if (computerChoice === "PAPER"){
-                alert("You lose! Paper beats Rock");
+                text.textContent = "You lose! Paper beats Rock";
                 ncomputerScore++;
             }
             else{
-                alert("You win! Rock beats Scissors");
+                text.textContent = "You win! Rock beats Scissors";
                 nhumanScore++;
             }
             break;
         case "PAPER":
             if (computerChoice === "ROCK"){
-                alert("You win! Paper beats Rock");
+                text.textContent = "You win! Paper beats Rock";
                 nhumanScore++;
             }
             else if (computerChoice === "PAPER"){
-                alert("Tie! Paper equals Paper");
+                text.textContent = "Tie! Paper equals Paper";
 
             }
             else{
-                alert("You Lose! Scissors beats Paper");
+                text.textContent = "You Lose! Scissors beats Paper";
                 ncomputerScore++;
             }
             break;
         case "SCISSORS":
             if (computerChoice === "ROCK"){
-                alert("You lose! Rock beats Scissors");
+                text.textContent = "You lose! Rock beats Scissors";
                 ncomputerScore++;
             }
             else if(computerChoice === "PAPER"){
-                alert("You win! Scissors beats Paper");
+                text.textContent = "You win! Scissors beats Paper";
                 nhumanScore++;
             }
             else{
-                alert("Tie! Scissors equals Scissors");
+                text.textContent = "Tie! Scissors equals Scissors";
             }
             break;
         default:
-            alert("Invalid input! Point goes to computer!");
+            text.textContent = "Invalid input! Point goes to computer!";
             ncomputerScore++;
     }
+    container.appendChild(text);
 }
 
 // FUNCTION playGame
